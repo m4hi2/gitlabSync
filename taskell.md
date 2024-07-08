@@ -9,8 +9,8 @@
 - Generate a config file
     > Config file will be generated in users home config folder. It'll be a json config because go stdlib has  a JSON parser and didn't want to increase dependencies.
     * [ ] Detect home folder
-    * [ ] Decide where to put config
-    * [ ] Make config sturct
+    * [x] Decide where to put config
+    * [x] Make config sturct
     * [ ] When App first lunches check for config if not found generate
 - Create CLI Interface
     > CLI interface will be used for following:

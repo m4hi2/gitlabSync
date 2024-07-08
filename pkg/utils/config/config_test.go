@@ -17,14 +17,20 @@ var (
 )
 
 var sampleConfig = &Config{
-	ConfigPath:  "~/.config/glSync/config.json",
-	GitlabToken: "asdf",
-	Groups: []*Group{
+	ConfigPath: "~/.config/glSync/config.json",
+	GitLabInstances: []*GitLabInstance{
 		{
-			GroupID:      0,
-			GroupName:    "test",
-			GroupRootDir: "/services",
-			LastSyncedAt: now,
+			Name:        "git.iammahir.com",
+			HostName:    "git.iammahir.com",
+			GitlabToken: "asdfasdfadsf",
+			Groups: []*Group{
+				{
+					GroupID:      0,
+					GroupName:    "test",
+					GroupRootDir: "/services",
+					LastSyncedAt: now,
+				},
+			},
 		},
 	},
 }
@@ -32,7 +38,7 @@ var sampleConfig = &Config{
 func TestConfig_Read(t *testing.T) {
 	wantConfig := sampleConfig
 
-	configSTR := fmt.Sprintf(`{ "config_path": "~/.config/glSync/config.json", "gitlab_token": "asdf", "groups": [ { "group_id": 0, "group_name": "test", "group_root_dir": "/services", "last_synced_at": "%s" } ] }`, mt)
+	configSTR := fmt.Sprintf(`{ "config_path": "~/.config/glSync/config.json", "gitlab_instances": [ { "name": "git.iammahir.com", "host_name": "git.iammahir.com", "gitlab_token": "asdfasdfadsf", "groups": [ { "group_id": 0, "group_name": "test", "group_root_dir": "/services", "last_synced_at": "%s" } ] } ] }`, mt)
 
 	rdr := strings.NewReader(configSTR)
 
@@ -54,13 +60,19 @@ func TestConfig_Write(t *testing.T) {
 	config := sampleConfig
 	configSTR := fmt.Sprintf(`{
   "config_path": "~/.config/glSync/config.json",
-  "gitlab_token": "asdf",
-  "groups": [
+  "gitlab_instances": [
     {
-      "group_id": 0,
-      "group_name": "test",
-      "group_root_dir": "/services",
-      "last_synced_at": "%s"
+      "name": "git.iammahir.com",
+      "host_name": "git.iammahir.com",
+      "gitlab_token": "asdfasdfadsf",
+      "groups": [
+        {
+          "group_id": 0,
+          "group_name": "test",
+          "group_root_dir": "/services",
+          "last_synced_at": "%s"
+        }
+      ]
     }
   ]
 }`, mt)

@@ -12,9 +12,8 @@ var (
 )
 
 type Config struct {
-	ConfigPath  string   `json:"config_path"`
-	GitlabToken string   `json:"gitlab_token"`
-	Groups      []*Group `json:"groups"`
+	ConfigPath      string            `json:"config_path"`
+	GitLabInstances []*GitLabInstance `json:"gitlab_instances"`
 }
 
 type Group struct {
@@ -22,6 +21,13 @@ type Group struct {
 	GroupName    string    `json:"group_name"`
 	GroupRootDir string    `json:"group_root_dir"`
 	LastSyncedAt time.Time `json:"last_synced_at"`
+}
+
+type GitLabInstance struct {
+	Name        string   `json:"name"`
+	HostName    string   `json:"host_name"`
+	GitlabToken string   `json:"gitlab_token"`
+	Groups      []*Group `json:"groups"`
 }
 
 func (c *Config) Write(writer io.Writer) error {
