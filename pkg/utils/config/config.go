@@ -11,6 +11,13 @@ var (
 	JSONPrefix = ""
 )
 
+type PullMethod string
+
+const (
+	PullMethodHTTP PullMethod = "http"
+	PullMethodSSH  PullMethod = "ssh"
+)
+
 type Config struct {
 	ConfigPath      string            `json:"config_path"`
 	GitLabInstances []*GitLabInstance `json:"gitlab_instances"`
@@ -24,10 +31,11 @@ type Group struct {
 }
 
 type GitLabInstance struct {
-	Name        string   `json:"name"`
-	HostName    string   `json:"host_name"`
-	GitlabToken string   `json:"gitlab_token"`
-	Groups      []*Group `json:"groups"`
+	Name        string     `json:"name"`
+	HostName    string     `json:"host_name"`
+	PullMethod  PullMethod `json:"pull_method"`
+	GitlabToken string     `json:"gitlab_token"`
+	Groups      []*Group   `json:"groups"`
 }
 
 func (c *Config) Write(writer io.Writer) error {

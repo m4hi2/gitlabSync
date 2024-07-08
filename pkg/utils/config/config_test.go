@@ -22,6 +22,7 @@ var sampleConfig = &Config{
 		{
 			Name:        "git.iammahir.com",
 			HostName:    "git.iammahir.com",
+			PullMethod:  PullMethodHTTP,
 			GitlabToken: "asdfasdfadsf",
 			Groups: []*Group{
 				{
@@ -38,7 +39,7 @@ var sampleConfig = &Config{
 func TestConfig_Read(t *testing.T) {
 	wantConfig := sampleConfig
 
-	configSTR := fmt.Sprintf(`{ "config_path": "~/.config/glSync/config.json", "gitlab_instances": [ { "name": "git.iammahir.com", "host_name": "git.iammahir.com", "gitlab_token": "asdfasdfadsf", "groups": [ { "group_id": 0, "group_name": "test", "group_root_dir": "/services", "last_synced_at": "%s" } ] } ] }`, mt)
+	configSTR := fmt.Sprintf(`{ "config_path": "~/.config/glSync/config.json", "gitlab_instances": [ { "name": "git.iammahir.com", "host_name": "git.iammahir.com", "pull_method": "http", "gitlab_token": "asdfasdfadsf", "groups": [ { "group_id": 0, "group_name": "test", "group_root_dir": "/services", "last_synced_at": "%s" } ] } ] }`, mt)
 
 	rdr := strings.NewReader(configSTR)
 
@@ -64,6 +65,7 @@ func TestConfig_Write(t *testing.T) {
     {
       "name": "git.iammahir.com",
       "host_name": "git.iammahir.com",
+      "pull_method": "http",
       "gitlab_token": "asdfasdfadsf",
       "groups": [
         {
