@@ -9,11 +9,11 @@ import (
 )
 
 type GroupRespPld struct {
-	ID       int         `json:"id"`
-	Path     string      `json:"path"`
-	Projects []*Projects `json:"projects"`
+	ID       int        `json:"id"`
+	Path     string     `json:"path"`
+	Projects []*Project `json:"projects"`
 }
-type Projects struct {
+type Project struct {
 	Path          string `json:"path"`
 	SSHURLToRepo  string `json:"ssh_url_to_repo"`
 	HTTPURLToRepo string `json:"http_url_to_repo"`
